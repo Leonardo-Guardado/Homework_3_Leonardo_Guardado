@@ -2,6 +2,7 @@ import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
+
 public class CSArrayListTest {
     public static void main(String[] args) {
         Collection<String> testCollection = new CSArrayList<>();
