@@ -2,7 +2,6 @@
 import java.util.Arrays;
 import java.util.AbstractList;
 import java.util.Collection;
-
 /**
  *  This class implements some of the methods of the Java
  *  ArrayList class.
