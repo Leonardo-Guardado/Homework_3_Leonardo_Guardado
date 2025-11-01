@@ -2,8 +2,7 @@ import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-
-public class CSArrayListTest {
+public class CSArrayListDriver {
     public static void main(String[] args) {
         Collection<String> testCollection = new CSArrayList<>();
         testCollection.add("A");
@@ -49,6 +48,7 @@ public class CSArrayListTest {
         newCollection.add("X");
         testCollection.addAll(newCollection);
         System.out.println(testCollection);
+
 
     }
 }
