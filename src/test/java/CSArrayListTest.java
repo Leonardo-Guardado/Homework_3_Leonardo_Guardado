@@ -38,12 +38,14 @@ class CSArrayListTest {
         ((CSArrayList<String>) testInsert).add(0, "D");      // [D, B, A, C]
         ((CSArrayList<String>) testInsert).add(3, "E");      // [D, B, A, E, C]
         //Assert
-        assertEquals(5, testInsert.size());
-        assertTrue(((CSArrayList<String>) testInsert).indexOf("D") == 0);
-        assertTrue(((CSArrayList<String>) testInsert).indexOf("B") == 1);
-        assertTrue(((CSArrayList<String>) testInsert).indexOf("A") == 2);
-        assertTrue(((CSArrayList<String>) testInsert).indexOf("E") == 3);
-        assertTrue(((CSArrayList<String>) testInsert).indexOf("C") == 4);
+        assertAll(
+                () -> assertEquals(5, testInsert.size()),
+                () -> assertTrue(((CSArrayList<String>) testInsert).indexOf("D") == 0),
+                () -> assertTrue(((CSArrayList<String>) testInsert).indexOf("B") == 1),
+                () -> assertTrue(((CSArrayList<String>) testInsert).indexOf("A") == 2),
+                () -> assertTrue(((CSArrayList<String>) testInsert).indexOf("E") == 3),
+                () -> assertTrue(((CSArrayList<String>) testInsert).indexOf("C") == 4)
+        );
     }
 
     @Test
@@ -88,5 +90,34 @@ class CSArrayListTest {
                 }
             }
         });
+    }
+
+    @Test
+    @DisplayName("Size Changes")
+    void sizeChange1() {
+        //Arrange
+        Collection<String> a = new CSArrayList<>();
+        a.add("A");
+        a.add("B");
+        a.add("C");
+        //Assert first size
+        assertEquals(3, a.size());
+
+        Collection<String> b = new CSArrayList<>();
+        b.add("Z");
+        b.add("Y");
+        b.add("X");
+        b.add("W");
+
+        //Act 1
+        a.addAll(b);
+        //Assert second size
+        assertEquals(7, a.size());
+
+        //Act 2
+        a.clear();
+        //Assert third size
+        assertEquals(0, a.size());
+
     }
 }
