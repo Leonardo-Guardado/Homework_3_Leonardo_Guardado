@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -49,7 +50,43 @@ public class CSArrayListDriver {
         testCollection.addAll(newCollection);
         System.out.println(testCollection);
 
+//---------------------------------------------------------------------------------------------------------------
+//Part E
+        //CSArrayList
+        System.out.println("CSArrayList");
+        int N = 1_000_000;
+        CSArrayList<Integer> list = new CSArrayList<>();
+        long t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            list.add(i);
+        }
+        long t1 = System.nanoTime();
+        java.util.Random r =  new java.util.Random();
+        long s = 0;
+        for (int i = 0; i < N; i++) {
+            s += list.get(r.nextInt(N));
+        }
+        long t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
 
+        //java.util.ArrayList
+        System.out.println("java.util.ArrayList");
+        ArrayList<Integer> b = new ArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            b.add(i);
+        }
+        t1 = System.nanoTime();
+        java.util.Random q =  new java.util.Random();
+        long s1 = 0;
+        for (int i = 0; i < N; i++) {
+            s1 += b.get(q.nextInt(N));
+        }
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
     }
+
 }
+
+
 //Baseline Results: A (testCollection[0]), B (testCollection[1]), 2 (CSArrayList size), true (testCollection contains B), 1 (indexOf "B" in testCollections)
