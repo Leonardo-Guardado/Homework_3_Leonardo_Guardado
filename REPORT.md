@@ -29,15 +29,15 @@ Pitfalls
 
 BenchMark Tests
 - Append
-(CSArrayList) | (java.util.ArrayList)
-  29.8 ms     |    127.9 ms
-  20.7 ms     |     84.1 ms
-  20.3 ms     |     80.7 ms
-  19.4 ms     |     83.4 ms
+| (CSArrayList) | (java.util.ArrayList) |
+|   29.8 ms     |    127.9 ms           |
+|   20.7 ms     |     84.1 ms           |
+|   20.3 ms     |     80.7 ms           |
+|   19.4 ms     |     83.4 ms           |
 
 -Get Random Integer
-(CSArrayList) | (java.util.ArrayList)
-  71.9 ms     |     63.2 ms
-  85.1 ms     |     69.2 ms
-  69.8 ms     |     81.4 ms
-  77.4 ms     |     71.3 ms
+| (CSArrayList) | (java.util.ArrayList) |
+|   71.9 ms     |     63.2 ms           |
+|   85.1 ms     |     69.2 ms           |
+|   69.8 ms     |     81.4 ms           |
+|   77.4 ms     |     71.3 ms           |
