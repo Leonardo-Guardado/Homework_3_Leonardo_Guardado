@@ -41,7 +41,8 @@ public class CSArrayListDriver {
         System.out.println(testCollection.size());
         System.out.println(testCollection.contains("B"));
         System.out.println(((CSArrayList<String>) testCollection).indexOf("B"));
-
+//---------------------------------------------------------------------------------------------
+        //Part C Test
         System.out.println(testCollection.toString());
         Collection<String> newCollection = new CSArrayList<>();
         newCollection.add("Z");
@@ -51,16 +52,20 @@ public class CSArrayListDriver {
         System.out.println(testCollection);
 
 //---------------------------------------------------------------------------------------------------------------
-//Part E
+//Part E Micro Benchmarking
+
         //CSArrayList
         System.out.println("CSArrayList");
         int N = 1_000_000;
+        //Initiating time
         CSArrayList<Integer> list = new CSArrayList<>();
         long t0 = System.nanoTime();
+        //Appending in CSArrayList
         for (int i = 0; i < N; i++) {
             list.add(i);
         }
         long t1 = System.nanoTime();
+        //Getting random integer from CSArrayList
         java.util.Random r =  new java.util.Random();
         long s = 0;
         for (int i = 0; i < N; i++) {
@@ -71,12 +76,15 @@ public class CSArrayListDriver {
 
         //java.util.ArrayList
         System.out.println("java.util.ArrayList");
+        //Initiating time
         ArrayList<Integer> b = new ArrayList<>();
         t0 = System.nanoTime();
+        //Appending in ArrayList
         for (int i = 0; i < N; i++) {
             b.add(i);
         }
         t1 = System.nanoTime();
+        //Getting random integer in ArrayList
         java.util.Random q =  new java.util.Random();
         long s1 = 0;
         for (int i = 0; i < N; i++) {
