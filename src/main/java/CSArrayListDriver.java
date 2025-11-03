@@ -24,7 +24,7 @@ public class CSArrayListDriver {
                 //Modifying list during iteration
                 if(s.equals("D")){
                     //Testing different modifications for ConcurrentModificationException
-                    testCollection.remove("D");
+                    testCollection.remove(s);
                     //testCollection.add("E");
                     //testCollection.clear();
                     //System.out.println("No Modification");
