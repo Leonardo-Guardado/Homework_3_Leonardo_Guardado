@@ -28,17 +28,18 @@
 - At the start of using JUnit, I have struggled a lot in the beginning because I was very confused of how to get it started and how to prepare the pox.xml file into allowing JUnit to be used
 
 **BenchMark Tests**
-* Append
+
+(Append)
 | (CSArrayList) | (java.util.ArrayList) |
-|---------------|-----------------------|
+| ------------- | --------------------- |
 |   29.8 ms     |    127.9 ms           |
 |   20.7 ms     |     84.1 ms           |
 |   20.3 ms     |     80.7 ms           |
 |   19.4 ms     |     83.4 ms           |
 
-* Get Random Integer
+(Get Random Integer)
 | (CSArrayList) | (java.util.ArrayList) |
-|---------------|-----------------------|
+| ------------- | --------------------- |
 |   71.9 ms     |     63.2 ms           |
 |   85.1 ms     |     69.2 ms           |
 |   69.8 ms     |     81.4 ms           |
