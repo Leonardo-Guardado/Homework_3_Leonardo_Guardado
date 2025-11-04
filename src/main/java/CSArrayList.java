@@ -175,7 +175,6 @@ public class CSArrayList<E>
      * Get the current capacity of the array
      * @return The current size of the array
      */
-    @Override
     public int capacity(){
         return capacity;
     }
@@ -205,6 +204,7 @@ public class CSArrayList<E>
      * Changes the ArrayList into a string
      * @return The ArrayList as a string, will pop up as [] if there are no items in the arraylist
      */
+    @Override
     public String toString(){
         //only brackets for if there is no element in array
         if (this.size == 0){
@@ -228,6 +228,7 @@ public class CSArrayList<E>
     /**
      * Clears the entire arraylist by turning each item one by one into null
      */
+    @Override
     public void clear(){
         //for every element, change to null
         for (int i = 0; i < size; i++) {
@@ -242,6 +243,7 @@ public class CSArrayList<E>
      * Tells us if the arraylist is empty
      * @return boolean of true or false whether the arraylist is empty
      */
+    @Override
     public boolean isEmpty(){
         return size == 0;
     }
@@ -249,8 +251,9 @@ public class CSArrayList<E>
     /**
      * removes specific object in parameter from the array list, using the indexOf(object) method to locate it
      * @param o element to be removed from this collection, if present
-     * @return
+     * @return true or false if an element is removed
      */
+    @Override
     public boolean remove(Object o){
         if (this.size == 0){
             //return false if nothing exists in array
@@ -263,15 +266,25 @@ public class CSArrayList<E>
         return true;
     }
 
+    /**
+     * Changes capacity into the minCapacity if initial capacity is less than the minimum
+     * @param  minCapacity
+     * @return
+     */
     public void ensureCapacity(int minCapacity) {
         //If the minCapacity is greater than the one we started with, the capacity will be incremented to the minimum stated
         if (minCapacity > this.capacity) {
             //main capacity incremented to the minimum
             this.capacity = minCapacity;
         }
+        //Resizing copy of array
         theData = Arrays.copyOf(theData, capacity);
     }
 
+    /**
+     * "Trims" the array so that the capacity equals the size of the arraylist
+     * @return
+     */
     public void trimToSize() {
         //Makes the capacity of array the same as the amount of elements in array
         this.capacity = this.size;
@@ -281,6 +294,14 @@ public class CSArrayList<E>
 //----------------------------------------------------------------------------------------------------------
 
     //Part C:----------------------------------------------------------------------------------------------------
+
+    /**
+     * Adds a new entire collection (new CSArrayList) to an already existing CSArrayList
+     * @param index
+     * @param c
+     * @return
+     */
+    @Override
     public boolean addAll(int index, Collection<? extends E> c){
         //Making sure that index is not outside of given array
         if(index < 0 || index > size){

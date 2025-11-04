@@ -31,6 +31,7 @@ public class CSArrayListDriver {
                 }
             }
         }
+        //catch ConcurrentModificationException from iterator change
         catch(ConcurrentModificationException e) {
             System.out.println("Caught ConcurrentModificationException");
         }
@@ -38,65 +39,169 @@ public class CSArrayListDriver {
         System.out.println(testCollection);
 
 
-        System.out.println(testCollection.size());
-        System.out.println(testCollection.contains("B"));
-        System.out.println(((CSArrayList<String>) testCollection).indexOf("B"));
+        System.out.println("Size of arraylist: " + testCollection.size());
+        System.out.println("Contains element (B): " + testCollection.contains("B"));
+        System.out.println("Index of element (B): " + ((CSArrayList<String>) testCollection).indexOf("B"));
 
         //Testing capacity changes
-        System.out.println(((CSArrayList<String>) testCollection).capacity()); //Initial
+        ((CSArrayList<String>) testCollection).ensureCapacity(10); //Ensure that capacity is at 10
+        System.out.println("Initial Capacity: " + ((CSArrayList<String>) testCollection).capacity()); //Initial
         ((CSArrayList<String>) testCollection).trimToSize(); //Trim array into the current size
-        System.out.println(((CSArrayList<String>) testCollection).capacity()); //Final
+        System.out.println("Capacity after trim: " + ((CSArrayList<String>) testCollection).capacity()); //Final
 //---------------------------------------------------------------------------------------------
         //Part C Test
-        System.out.println(testCollection.toString());
-        Collection<String> newCollection = new CSArrayList<>();
-        newCollection.add("Z");
+        System.out.println(testCollection.toString());          //Making original array as a string
+        Collection<String> newCollection = new CSArrayList<>(); //Creating new arraylist
+        newCollection.add("Z");                                 //Adding new elements to new arraylist
         newCollection.add("Y");
         newCollection.add("X");
-        testCollection.addAll(newCollection);
-        System.out.println(testCollection);
+        testCollection.addAll(newCollection);                          //Using addAll method
+        System.out.println("Array after adAll: " + testCollection);    //[A,B,C,Z,Y,X] <- Final after method
 
 //---------------------------------------------------------------------------------------------------------------
 //Part E Micro Benchmarking
 
+        //Start Benchmarking, with 1,000,000 Elements
         //CSArrayList
-        System.out.println("CSArrayList");
+        System.out.println("\n1,000,000 Elements");
+        System.out.print("CSArrayList: ");
         int N = 1_000_000;
         //Initiating time
-        CSArrayList<Integer> list = new CSArrayList<>();
+        CSArrayList<Integer> a = new CSArrayList<>();
         long t0 = System.nanoTime();
         //Appending in CSArrayList
-        for (int i = 0; i < N; i++) {
-            list.add(i);
-        }
+        for (int i = 0; i < N; i++) a.add(i);
         long t1 = System.nanoTime();
         //Getting random integer from CSArrayList
         java.util.Random r =  new java.util.Random();
         long s = 0;
-        for (int i = 0; i < N; i++) {
-            s += list.get(r.nextInt(N));
-        }
+        for (int i = 0; i < N; i++) s += a.get(r.nextInt(N));
+        //Getting second nanotime
         long t2 = System.nanoTime();
-        System.out.printf("append=%.1f ms get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
 
         //java.util.ArrayList
-        System.out.println("java.util.ArrayList");
+        System.out.print("java.util.ArrayList: ");
         //Initiating time
         ArrayList<Integer> b = new ArrayList<>();
         t0 = System.nanoTime();
         //Appending in ArrayList
-        for (int i = 0; i < N; i++) {
-            b.add(i);
-        }
+        for (int i = 0; i < N; i++) b.add(i);
         t1 = System.nanoTime();
         //Getting random integer in ArrayList
-        java.util.Random q =  new java.util.Random();
+        r =  new java.util.Random();
         long s1 = 0;
-        for (int i = 0; i < N; i++) {
-            s1 += b.get(q.nextInt(N));
-        }
+        for (int i = 0; i < N; i++) s1 += b.get(r.nextInt(N));
         t2 = System.nanoTime();
-        System.out.printf("append=%.1f ms get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        // Same process but 750,000 elements
+        //CSArrayList
+        System.out.println("\n750,000 Elements");
+        N = 750_000;
+        System.out.print("CSArrayList: ");
+        CSArrayList<Integer> a2 = new CSArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) a2.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s = 0;
+        for (int i = 0; i < N; i++) s += a2.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //java.util.ArrayList
+        System.out.print("java.util.ArrayList: ");
+        ArrayList<Integer> b2 = new ArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) b2.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s1 = 0;
+        for (int i = 0; i < N; i++) s1 += b2.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //500,000 Elements
+        //CSArrayList
+        System.out.println("\n500,000 Elements");
+        N = 500_000;
+        System.out.print("CSArrayList: ");
+        CSArrayList<Integer> a3 = new CSArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) a3.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s = 0;
+        for (int i = 0; i < N; i++) s += a3.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //java.util.ArrayList
+        System.out.print("java.util.ArrayList: ");
+        ArrayList<Integer> b3 = new ArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) b3.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s1 = 0;
+        for (int i = 0; i < N; i++) s1 += b3.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //250,000 Elements
+        //CSArrayList
+        System.out.println("\n250,000 Elements");
+        N = 250_000;
+        System.out.print("CSArrayList: ");
+        CSArrayList<Integer> a4 = new CSArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) a4.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s = 0;
+        for (int i = 0; i < N; i++) s += a4.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //java.util.ArrayList
+        System.out.print("java.util.ArrayList: ");
+        ArrayList<Integer> b4 = new ArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) b4.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s1 = 0;
+        for (int i = 0; i < N; i++) s1 += b4.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //100,000 Elements
+        //CSArrayList
+        System.out.println("\n100,000 Elements");
+        N = 100_000;
+        System.out.print("CSArrayList: ");
+        CSArrayList<Integer> a5 = new CSArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) a5.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s = 0;
+        for (int i = 0; i < N; i++) s += a5.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
+
+        //java.util.ArrayList
+        System.out.print("java.util.ArrayList: ");
+        ArrayList<Integer> b5 = new ArrayList<>();
+        t0 = System.nanoTime();
+        for (int i = 0; i < N; i++) b5.add(i);
+        t1 = System.nanoTime();
+        r =  new java.util.Random();
+        s1 = 0;
+        for (int i = 0; i < N; i++) s1 += b5.get(r.nextInt(N));
+        t2 = System.nanoTime();
+        System.out.printf("append=%.1f ms, get=%.1f ms\n", (t1-t0)/1e6,  (t2-t1)/1e6);
     }
 
 }
