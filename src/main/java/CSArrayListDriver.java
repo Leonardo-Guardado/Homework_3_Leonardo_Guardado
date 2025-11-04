@@ -41,6 +41,10 @@ public class CSArrayListDriver {
         System.out.println(testCollection.size());
         System.out.println(testCollection.contains("B"));
         System.out.println(((CSArrayList<String>) testCollection).indexOf("B"));
+
+        System.out.println(((CSArrayList<String>) testCollection).capacity());
+        ((CSArrayList<String>) testCollection).trimToSize();
+        System.out.println(((CSArrayList<String>) testCollection).capacity());
 //---------------------------------------------------------------------------------------------
         //Part C Test
         System.out.println(testCollection.toString());

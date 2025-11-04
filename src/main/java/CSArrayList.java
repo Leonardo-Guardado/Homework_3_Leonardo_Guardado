@@ -172,6 +172,15 @@ public class CSArrayList<E>
     }
 
     /**
+     * Get the current capacity of the array
+     * @return The current size of the array
+     */
+    @Override
+    public int capacity(){
+        return capacity;
+    }
+
+    /**
      * Returns the index of the first occurrence of the specified element
      * in this list, or -1 if this list does not contain the element
      * @param item The object to search for
